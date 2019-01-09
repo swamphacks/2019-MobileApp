@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Schedule
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-list>
+    <button ion-item (click)="openSchedule(0)">Friday</button>
+    <button ion-item (click)="openSchedule(1)">Saturday</button>
+    <button ion-item (click)="openSchedule(2)">Sunday</button>
+  </ion-list>
+  <!-- <ion-list>
+      <ion-card *ngFor="let event of events">
+        <ion-card-header style="background-color: #A3D3F2">
+          {{event.name}}
+        </ion-card-header>
+        <ion-card-content>
+          <ion-row>
+            <ion-col>
+              <div class="inline"><b> Date:</b></div>
+              <div class="inline">{{event.day}}, {{event.startTime | date:'MM-dd-yyyy'}}</div>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <div class="inline"><b>Time:</b></div>
+              <div class="inline">{{event.startTime | date:'shortTime'}} to {{event.endTime | date:'shortTime'}}</div>
+            </ion-col>
+          </ion-row>
+          <ion-row *ngIf="event.location !== ''">
+            <ion-col>
+              <div class="inline"><b>Location:</b></div>
+              <div class="inline">{{event.location}}</div>
+            </ion-col>
+          </ion-row>
+          <ion-row *ngIf="event.description !== ''">
+            <ion-col>
+              <b>Description:</b>
+              <p>{{event.description}}</p>
+            </ion-col>
+          </ion-row>
+        </ion-card-content>
+      </ion-card>
+    </ion-list> -->
+</ion-content>

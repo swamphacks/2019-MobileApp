@@ -1,19 +1,29 @@
 import { Component } from '@angular/core';
+import { NavController } from 'ionic-angular';
 
-import { AboutPage } from '../about/about';
-import { ContactPage } from '../contact/contact';
-import { HomePage } from '../home/home';
+import { SchedulePage } from '../schedule/schedule';
+import { SettingsPage } from '../settings/settings';
+import { EventsPage } from '../events/events';
+import { LoginPage } from '../login/login';
+
+import { FirebaseProvider } from '../../providers/firebase/firebase';
 
 @Component({
   templateUrl: 'tabs.html'
 })
 export class TabsPage {
 
-  tab1Root = HomePage;
-  tab2Root = AboutPage;
-  tab3Root = ContactPage;
+  tab1Root = EventsPage;
+  tab2Root = SchedulePage;
+  tab3Root = SettingsPage;
 
-  constructor() {
-
+  constructor(public navCtrl: NavController, private firebaseProvider: FirebaseProvider) {
+    this.firebaseProvider.getAuth().auth
+      .onAuthStateChanged(function(user) {
+        if(user) {
+        } else {
+          this.navCtrl.setRoot(LoginPage);
+        }
+      }.bind(this));
   }
 }

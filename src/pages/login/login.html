@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-navbar>
+    <button menuToggle ion-button>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>
+      Swamphacks 2019
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-grid>
+    <ion-row>
+      <ion-col align="center">
+        <form autocomplete="off" novalidate [formGroup]="form">
+          <ion-list align="center">
+                <ion-item>
+                    <ion-label floating>Email</ion-label>
+                    <ion-input name="email" formControlName="email"></ion-input>
+                </ion-item>
+                <ion-item>
+                    <ion-label floating>Password</ion-label>
+                    <ion-input name="password" formControlName="password" type="password"></ion-input>
+                </ion-item>
+
+            <button ion-button (click)="login()" id="loginBtn">Login</button>
+          </ion-list>
+        </form>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col align="center">
+        or <a (click)="registerPage()"> register here</a>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

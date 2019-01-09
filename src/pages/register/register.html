@@ -1,0 +1,50 @@
+<ion-header>
+  <ion-navbar>
+    <button menuToggle ion-button>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>
+      Swamphacks 2019
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-grid>
+    <ion-row>
+      <ion-col align="center">
+        <form autocomplete="off" novalidate [formGroup]="form">
+          <ion-list align="center">
+            <ion-item>
+                <ion-label floating>Name</ion-label>
+                <ion-input name="name" formControlName="name"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label floating>Email</ion-label>
+                <ion-input name="email" formControlName="email"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label floating>Password</ion-label>
+                <ion-input name="password" formControlName="password" type="password"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label floating>Confirm Password</ion-label>
+                <ion-input name="confirm_password" formControlName="confirm_password" type="password"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label floating>Security Code</ion-label>
+                <ion-input name="code" formControlName="code"></ion-input>
+            </ion-item>
+
+            <button ion-button (click)="register()" id="registerBtn">Register</button>
+          </ion-list>
+        </form>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col align="center">
+        or <a (click)="loginPage()"> login here</a>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
