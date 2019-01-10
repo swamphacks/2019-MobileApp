@@ -55,12 +55,49 @@ export class LoginPage {
   }
 
   forgotPassword() {
-    this.firebaseProvider.resetPassword(this.form.value.email);
-    let toast = this.toastCtrl.create({
-      message: 'Password reset email sent!',
-      duration: 3000
-    });
-    toast.present();
+    let email = this.form.value.email;
+    if (email && email != '') {
+      this.firebaseProvider.resetPassword(email).then(function() {
+        let toast = this.toastCtrl.create({
+          message: 'Password reset email sent!',
+          duration: 3000
+        });
+        toast.present();
+      }.bind(this)).catch(function(err) {
+        this.handleError(err);
+      }.bind(this));
+    } else {
+      let toast = this.toastCtrl.create({
+        message: 'Please enter an email.',
+        duration: 3000
+      });
+      toast.present();
+    }
+  }
+
+  handleError(error) {
+    let errorCode = error.code;
+    let errorMessage = error.message;
+
+    if (errorCode.includes("auth/invalid-email")) {
+      let toast = this.toastCtrl.create({
+        message: 'Invalid Email Format',
+        duration: 3000
+      });
+      toast.present();
+    } else if (errorCode.includes("auth/user-not-found")) {
+      let toast = this.toastCtrl.create({
+        message: 'This account does not exist',
+        duration: 3000
+      });
+      toast.present();
+    } else {
+      let toast = this.toastCtrl.create({
+        message: 'Error in sending password reset email',
+        duration: 3000
+      });
+      toast.present();
+    }
   }
 
 }

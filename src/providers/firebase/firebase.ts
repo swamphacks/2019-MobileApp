@@ -34,7 +34,7 @@ export class FirebaseProvider {
   }
 
   resetPassword(email) {
-    this.afAuth.auth.sendPasswordResetEmail(email);
+    return this.afAuth.auth.sendPasswordResetEmail(email);
   }
 
   logout() {
