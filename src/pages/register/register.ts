@@ -12,7 +12,7 @@ import { LoginPage } from '../login/login';
 })
 export class RegisterPage {
   form: FormGroup;
-  SECURITY_CODE: string = '0000';
+  SECURITY_CODE: string = '48571';
 
   constructor(public navCtrl: NavController,
     private formBuilder: FormBuilder,

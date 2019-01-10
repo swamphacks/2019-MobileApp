@@ -9,6 +9,7 @@ import { SchedulePage } from '../pages/schedule/schedule';
 import { ScheduleModalPage } from '../pages/schedule/scheduleModal/scheduleModal';
 import { SettingsPage } from '../pages/settings/settings';
 import { EventsPage } from '../pages/events/events';
+import { EventModalPage } from '../pages/events/eventModal/eventModal';
 import { TabsPage } from '../pages/tabs/tabs';
 
 import { StatusBar } from '@ionic-native/status-bar';
@@ -30,6 +31,7 @@ import { FirebaseProvider } from '../providers/firebase/firebase';
     ScheduleModalPage,
     SettingsPage,
     EventsPage,
+    EventModalPage,
     TabsPage,
     LoginPage,
     RegisterPage
@@ -49,6 +51,7 @@ import { FirebaseProvider } from '../providers/firebase/firebase';
     ScheduleModalPage,
     SettingsPage,
     EventsPage,
+    EventModalPage,
     TabsPage,
     LoginPage,
     RegisterPage

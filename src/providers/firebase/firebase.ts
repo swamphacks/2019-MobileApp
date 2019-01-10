@@ -33,6 +33,10 @@ export class FirebaseProvider {
     return this.afAuth.auth.createUserWithEmailAndPassword(email, password);
   }
 
+  resetPassword(email) {
+    this.afAuth.auth.sendPasswordResetEmail(email);
+  }
+
   logout() {
     // this.goOffline();
     this.afAuth.auth.signOut();
@@ -69,6 +73,18 @@ export class FirebaseProvider {
 
   getQrEvents() {
     return this.afDatabase.list('/events', ref => ref.orderByChild('qrNeeded').equalTo(true));
+  }
+
+  getGeneralEvents() {
+    return this.afDatabase.list('/events', ref => ref.orderByChild('type').equalTo('general'));
+  }
+
+  getFoodEvents() {
+    return this.afDatabase.list('/events', ref => ref.orderByChild('type').equalTo('food'));
+  }
+
+  getActivityEvents() {
+    return this.afDatabase.list('/events', ref => ref.orderByChild('type').equalTo('activity'));
   }
   
   hasAttended(userId, eventName) {

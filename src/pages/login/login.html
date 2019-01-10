@@ -23,7 +23,9 @@
                     <ion-label floating>Password</ion-label>
                     <ion-input name="password" formControlName="password" type="password"></ion-input>
                 </ion-item>
-
+                <ion-item>
+                    <ion-label (click)="forgotPassword()">Forgot Password</ion-label>
+                </ion-item>
             <button ion-button (click)="login()" id="loginBtn">Login</button>
           </ion-list>
         </form>

@@ -54,4 +54,13 @@ export class LoginPage {
     this.navCtrl.push(RegisterPage);
   }
 
+  forgotPassword() {
+    this.firebaseProvider.resetPassword(this.form.value.email);
+    let toast = this.toastCtrl.create({
+      message: 'Password reset email sent!',
+      duration: 3000
+    });
+    toast.present();
+  }
+
 }
