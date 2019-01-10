@@ -34,7 +34,6 @@ export class EventModalPage {
               // activity
               return this.firebaseProvider.getActivityEvents().valueChanges();
           }
-          // return this.firebaseProvider.getQrEvents().valueChanges();
         }
         return [];
       });
@@ -48,6 +47,7 @@ export class EventModalPage {
     this.barcodeScanner.scan().then((barcodeData) => {
         if(!barcodeData.cancelled) {
           const userId = barcodeData.text;
+          // this.presentToast('ID: ' + userId, 2000);
           this.firebaseProvider.hasAttended(userId, eventName).then(attended => {
             if(!attended) {
               this.firebaseProvider.recordAttendance(userId, eventName);
@@ -60,7 +60,7 @@ export class EventModalPage {
             }
           });
         }else {
-          this.navCtrl.push(EventModalPage);
+          this.navCtrl.push(EventModalPage, {'type': this.eventType});
         }
     }, (err) => {
       this.presentToast(err, 3000);
