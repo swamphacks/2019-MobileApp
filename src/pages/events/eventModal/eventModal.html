@@ -14,58 +14,149 @@
 
 <ion-content padding>
     <ion-list>
-        <ion-card *ngFor="let event of events | async" (click)="scan(event.name)">
-          <ion-card-header style="background-color: #A3D3F2">
-            {{event.name}}
-          </ion-card-header>
-          <ion-card-content>
-            <ion-row>
-              <ion-col>
-                <div class="inline"><b> Date:</b></div>
-                <div class="inline">{{event.day}}, {{event.startTime | date:'MM-dd-yyyy'}}</div>
-              </ion-col>
-            </ion-row>
-            <ion-row>
-              <ion-col>
-                <div class="inline"><b>Time:</b></div>
-                <div class="inline">{{event.startTime | date:'shortTime'}} to {{event.endTime | date:'shortTime'}}</div>
-              </ion-col>
-            </ion-row>
-            <ion-row>
-              <ion-col *ngIf="event.location !== ''">
-                <div class="inline"><b>Location:</b></div>
-                <div class="inline">{{event.location}}</div>
-              </ion-col>
-            </ion-row>
-            <ion-row *ngIf="event.description !== ''">
-              <ion-col>
-                <b>Description:</b>
-                <p>{{event.description}}</p>
-              </ion-col>
-            </ion-row>
-            <ion-row>
-              <ion-col>
-                <div class="inline"><b>Type:</b></div>
-                <div class="inline">{{event.type}}</div>
-              </ion-col>
-            </ion-row>
-            <ion-row *ngIf="event.attendants">
-              <ion-col>
-                <ion-item>
-                  <b>Attended</b>
-                  <ion-badge item-end>{{event.attendants.length}}</ion-badge>
-                </ion-item>
-              </ion-col>
-            </ion-row>
-            <ion-row *ngIf="!event.attendants">
-              <ion-col>
-                <ion-item>
-                  <b>Attended</b>
-                  <ion-badge item-end>0</ion-badge>
-                </ion-item>
-              </ion-col>
-            </ion-row>
-          </ion-card-content>
-        </ion-card>
-      </ion-list>
+      <div *ngFor="let event of events | async">
+          <ion-card *ngIf="eventType && eventType === 'general' && event.name === 'Hacker Check-In'">
+              <ion-card-header style="background-color: #A3D3F2">
+                {{event.name}}
+              </ion-card-header>
+              <ion-card-content>
+                <ion-row>
+                  <ion-col>
+                    <div class="inline"><b> Date:</b></div>
+                    <div class="inline">{{event.day}}, {{event.startTime | date:'MM-dd-yyyy'}}</div>
+                  </ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col>
+                    <div class="inline"><b>Time:</b></div>
+                    <div class="inline">{{event.startTime | date:'shortTime'}} to {{event.endTime | date:'shortTime'}}</div>
+                  </ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col *ngIf="event.location !== ''">
+                    <div class="inline"><b>Location:</b></div>
+                    <div class="inline">{{event.location}}</div>
+                  </ion-col>
+                </ion-row>
+                <ion-row *ngIf="event.description !== ''">
+                  <ion-col>
+                    <b>Description:</b>
+                    <p>{{event.description}}</p>
+                  </ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col>
+                    <div class="inline"><b>Type:</b></div>
+                    <div class="inline">{{event.type}}</div>
+                  </ion-col>
+                </ion-row>
+                <ion-row *ngIf="event.attendants">
+                  <ion-col>
+                    <ion-item>
+                      <b>Attended</b>
+                      <ion-badge item-end>{{event.attendants.length}}</ion-badge>
+                    </ion-item>
+                  </ion-col>
+                </ion-row>
+                <ion-row *ngIf="!event.attendants">
+                  <ion-col>
+                    <ion-item>
+                      <b>Attended</b>
+                      <ion-badge item-end>0</ion-badge>
+                    </ion-item>
+                  </ion-col>
+                </ion-row>
+                <ion-row>
+                    <!-- <input type="text" class="qrcode-text"> -->
+                    <label class="qrcode-text-btn"> Scan QR Code
+                       <input type="file"
+                             accept="image/*"
+                             capture="environment"
+                             (change)="openQrCamera($event, event.name)"
+                             tabindex="-1">
+                    </label>
+                </ion-row>
+              </ion-card-content>
+            </ion-card>
+            <ion-card *ngIf="eventType && eventType !== 'general'">
+                <ion-card-header style="background-color: #A3D3F2">
+                  {{event.name}}
+                </ion-card-header>
+                <ion-card-content>
+                  <ion-row>
+                    <ion-col>
+                      <div class="inline"><b> Date:</b></div>
+                      <div class="inline">{{event.day}}, {{event.startTime | date:'MM-dd-yyyy'}}</div>
+                    </ion-col>
+                  </ion-row>
+                  <ion-row>
+                    <ion-col>
+                      <div class="inline"><b>Time:</b></div>
+                      <div class="inline">{{event.startTime | date:'shortTime'}} to {{event.endTime | date:'shortTime'}}</div>
+                    </ion-col>
+                  </ion-row>
+                  <ion-row>
+                    <ion-col *ngIf="event.location !== ''">
+                      <div class="inline"><b>Location:</b></div>
+                      <div class="inline">{{event.location}}</div>
+                    </ion-col>
+                  </ion-row>
+                  <ion-row *ngIf="event.description !== ''">
+                    <ion-col>
+                      <b>Description:</b>
+                      <p>{{event.description}}</p>
+                    </ion-col>
+                  </ion-row>
+                  <ion-row>
+                    <ion-col>
+                      <div class="inline"><b>Type:</b></div>
+                      <div class="inline">{{event.type}}</div>
+                    </ion-col>
+                  </ion-row>
+                  <ion-row *ngIf="event.classification && event.classification === 'main'"  radio-group>
+                    <ion-col align="center">
+                      <ion-label>1st</ion-label>
+                      <ion-radio value="300" (click)="eventScoreClicked(event.name, 300)"></ion-radio>
+                    </ion-col>
+                  
+                    <ion-col align="center">
+                      <ion-label>2nd</ion-label>
+                      <ion-radio value="250" (click)="eventScoreClicked(event.name, 250)"></ion-radio>
+                    </ion-col>
+                  
+                    <ion-col align="center">
+                      <ion-label>3rd</ion-label>
+                      <ion-radio value="200" (click)="eventScoreClicked(event.name, 200)"></ion-radio>
+                    </ion-col>
+                    </ion-row>
+                  <ion-row *ngIf="event.attendants">
+                    <ion-col>
+                      <ion-item>
+                        <b>Attended</b>
+                        <ion-badge item-end>{{event.attendants.length}}</ion-badge>
+                      </ion-item>
+                    </ion-col>
+                  </ion-row>
+                  <ion-row *ngIf="!event.attendants">
+                    <ion-col>
+                      <ion-item>
+                        <b>Attended</b>
+                        <ion-badge item-end>0</ion-badge>
+                      </ion-item>
+                    </ion-col>
+                  </ion-row>
+                  <ion-row>
+                      <!-- <input type="text" class="qrcode-text"> -->
+                      <label class="qrcode-text-btn"> Scan QR Code
+                         <input type="file"
+                               accept="image/*"
+                               capture="environment"
+                               (change)="openQrCamera($event, event.name, event.classification)"
+                               tabindex="-1">
+                      </label>
+                  </ion-row>
+                </ion-card-content>
+              </ion-card>
+      </div>
+    </ion-list>
 </ion-content>

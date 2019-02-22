@@ -29,6 +29,10 @@ export class EventsPage {
         // activity
         modal = this.modalCtrl.create(EventModalPage, {'type': 'activity'});
         break;
+      case 3:
+        // activity
+        modal = this.modalCtrl.create(EventModalPage, {'type': 'workshop'});
+        break;
     }
     modal.present();
   }

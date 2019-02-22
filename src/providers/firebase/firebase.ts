@@ -86,13 +86,18 @@ export class FirebaseProvider {
   getActivityEvents() {
     return this.afDatabase.list('/events', ref => ref.orderByChild('type').equalTo('activity'));
   }
+
+  getWorkshopEvents() {
+    return this.afDatabase.list('/events', ref => ref.orderByChild('type').equalTo('workshop'));
+  }
   
   hasAttended(userId, eventName) {
     const attendancePromise = new Promise(function(resolve, reject) {
-      this.afDatabase.list('users/'+userId+'/events/').valueChanges()
-      .subscribe(snapshot => {
-        for(let event of snapshot) {
-          if(eventName === event.name) {
+      this.afDatabase.database.ref('users/'+userId+'/events/').once('value')
+      .then(snapshot => {
+        // check for hacker event first
+        for(let id in snapshot.val()) {
+          if(eventName === snapshot.val()[id].name) {
             resolve(true);
           }
         }
@@ -108,11 +113,31 @@ export class FirebaseProvider {
       .orderByChild('name').equalTo(eventName).limitToFirst(1).once('value')
       .then(function(snapshot) {
         for (let key in snapshot.val()) {
-          let attendants = snapshot.val()[key]['attendants'] ? snapshot.val()[key]['attendants'] : [];
+          let attendants =  snapshot.val()[key] && snapshot.val()[key]['attendants'] ? snapshot.val()[key]['attendants'] : [];
           attendants.push(userId);
           this.afDatabase.object('events/'+key).update({'attendants': attendants});
         }
       }.bind(this));
     this.afDatabase.list('users/'+userId+'/events/').push({'name': eventName});
   }
+
+  checkedIn() {
+    return this.afDatabase.database.ref('events/-LWXAZP1MvXDFXamHzg7/attendants');
+  }
+
+  getUserTeam(userId) {
+    return this.afDatabase.database.ref('users/'+userId);
+  }
+
+  updateTeamPoints(team, points) {
+    this.afDatabase.database.ref('teamPoints').once('value').then(function(snapshot) {
+      let teamPoints = snapshot.val();
+      let currentTeamPoints = teamPoints[team] ? teamPoints[team] : 0;
+      let totalPoints = points + currentTeamPoints;
+      let update = {};
+      update[team] = totalPoints;
+      this.afDatabase.database.ref('teamPoints').update(update);
+    }.bind(this));
+  }
 }
+

@@ -10,6 +10,7 @@ import { ScheduleModalPage } from '../pages/schedule/scheduleModal/scheduleModal
 import { SettingsPage } from '../pages/settings/settings';
 import { EventsPage } from '../pages/events/events';
 import { EventModalPage } from '../pages/events/eventModal/eventModal';
+import { QrScannerModalPage } from '../pages/events/eventModal/qrScanner';
 import { TabsPage } from '../pages/tabs/tabs';
 
 import { StatusBar } from '@ionic-native/status-bar';
@@ -24,6 +25,8 @@ import {AngularFireAuthModule} from "angularfire2/auth";
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { FirebaseProvider } from '../providers/firebase/firebase';
 
+import { NgQrScannerModule } from 'angular2-qrscanner';
+
 @NgModule({
   declarations: [
     MyApp,
@@ -32,6 +35,7 @@ import { FirebaseProvider } from '../providers/firebase/firebase';
     SettingsPage,
     EventsPage,
     EventModalPage,
+    QrScannerModalPage,
     TabsPage,
     LoginPage,
     RegisterPage
@@ -42,7 +46,8 @@ import { FirebaseProvider } from '../providers/firebase/firebase';
     AngularFireModule.initializeApp(firebase_config),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
-    AngularFirestoreModule
+    AngularFirestoreModule,
+    NgQrScannerModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -52,6 +57,7 @@ import { FirebaseProvider } from '../providers/firebase/firebase';
     SettingsPage,
     EventsPage,
     EventModalPage,
+    QrScannerModalPage,
     TabsPage,
     LoginPage,
     RegisterPage

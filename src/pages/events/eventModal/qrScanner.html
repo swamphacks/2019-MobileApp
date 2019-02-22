@@ -1,0 +1,32 @@
+<ion-header>
+    <ion-toolbar>
+      <ion-title>
+        Events
+      </ion-title>
+      <ion-buttons start>
+        <button ion-button (click)="dismiss()">
+          <span ion-text color="primary">Close</span>
+          <!-- <ion-icon name="md-close" showWhen="android, windows"></ion-icon> -->
+        </button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+
+<ion-content padding>
+      <!-- <qr-scanner
+      [debug]="false"
+      [canvasWidth]="1080"
+      [canvasHeight]="720"
+      [stopAfterScan]="false"
+      [updateTime]="500">
+      </qr-scanner> -->
+
+      <input type="text" class="qrcode-text">
+      <label class="qrcode-text-btn">
+         <input type="file"
+               accept="image/*"
+               capture="environment"
+               (change)="openQrCamera($event)"
+               tabindex="-1">
+      </label>
+</ion-content>

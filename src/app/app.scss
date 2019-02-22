@@ -14,3 +14,29 @@
 // To declare rules for a specific mode, create a child rule
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
+
+
+
+.successToast{
+    div{
+      background-color:#20c552!important;
+      font-weight: bold;
+    //   position: absolute;
+    //   top: 446px !important;
+      text-align: center !important;
+      border-radius: 10px !important;
+      width: 90% !important;
+    }
+}
+
+.errorToast{
+    div{
+      background-color:#d15151!important;
+      font-weight: bold;
+    //   position: absolute;
+    //   top: 446px !important;
+      text-align: center !important;
+      border-radius: 10px !important;
+      width: 90% !important;
+    }
+}
